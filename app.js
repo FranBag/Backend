@@ -2,7 +2,9 @@ import express, {json} from "express";
 const app = express();
 const router = express.Router();
 
-import config from "./src/config/config.json"
+import config from "./src/config/config.json" assert { type: 'json' };
+
+import {get_all} from "./src/controllers/userController.js"
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -10,6 +12,7 @@ app.use(express.urlencoded({extended:true}));
 // import de routes
 
 // app.use();
+app.get("/", get_all);
 
 
 

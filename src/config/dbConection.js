@@ -1,10 +1,6 @@
-import mysql from "mysql2";
-import config from "./config.json";
+import mysql from "mysql2/promise";
+import config from "./config.json" assert { type: 'json' };;
 
-const db = mysql.createConnection(config.database);
-
-db.connect((err)=>{
-    err ? console.log(err) : console.log("Base de datos conectada.")
-})
+const db = mysql.createPool(config.database);
 
 export default db;
