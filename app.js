@@ -1,12 +1,20 @@
-const express = require("express");
+import express, {json} from "express";
 const app = express();
 const router = express.Router();
+
+import config from "./src/config/config.json"
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-app.user((req, res) => {
-    res.status(404).send("La página no ha sido encontrada.");
+// import de routes
+
+// app.use();
+
+
+
+app.use((req, res) => {
+    res.status(404).send("Página no encontrada.");
 });
 
 app.listen(config.server.port, (err) => {
@@ -14,6 +22,6 @@ app.listen(config.server.port, (err) => {
         console.log(err);
         return;
     }else{
-        console.log("Tu servidor anda perfe my brother.")
+        console.log("Servidor funcionando en el puerto " + config.server.port);
     }
 });
