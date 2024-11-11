@@ -11,8 +11,9 @@ app.use(express.urlencoded({extended:true}));
 
 // import de routes
 
+
 // app.use();
-app.get("/", get_all);
+app.get("/api/hola", get_all);
 
 
 
@@ -28,3 +29,4 @@ app.listen(config.server.port, (err) => {
         console.log("Servidor funcionando en el puerto " + config.server.port);
     }
 });
+
