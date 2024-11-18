@@ -1,25 +1,22 @@
 import express, {json} from "express";
 const app = express();
-const router = express.Router();
 
 import config from "./src/config/config.json" assert { type: 'json' };
-
-import {get_all} from "./src/controllers/userController.js"
+import userRouter from "./src/router/userRoutes.js";
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-// import de routes
 
 
-// app.use();
-app.get("/api/hola", get_all);
+app.use("/user", userRouter);
 
 
 
 app.use((req, res) => {
     res.status(404).send("Página no encontrada.");
 });
+
 
 app.listen(config.server.port, (err) => {
     if(err){

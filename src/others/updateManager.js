@@ -1,24 +1,24 @@
 export const updateManager = (data) => {
-    let updateQuery = "";
+    let updatedQuery = "";
     const params = [];
     if(data.name){
-        updateQuery += "name = ?";
+        updatedQuery += "name = ?";
         params.push(data.name)
     }
     if(data.email){
-        updateQuery += (updateQuery ? ", " : "") + "email = ?";
+        updatedQuery += (updatedQuery ? ", " : "") + "email = ?";
         params.push(data.email)
     }
     if(data.phone_number){
-        updateQuery += (updateQuery ? ", " : "") + "phone_number = ?";
+        updatedQuery += (updatedQuery ? ", " : "") + "phone_number = ?";
         params.push(data.phone_number)
     }
     if(data.pass){
-        updateQuery += (updateQuery ? ", " : "") + "pass = ?";
+        updatedQuery += (updatedQuery ? ", " : "") + "pass = ?";
         params.push(data.pass)
     }
-
-    return updateQuery, params;
+    console.log(updatedQuery)
+    return{updatedQuery, params};
 }
 
 /* prueba
@@ -29,6 +29,6 @@ const datos = {
     pass:"pepito123"
 }
 
-const [a, b] = updateManager(datos);
+const {updatedQuery, params} = updateManager(datos);
 
 */
