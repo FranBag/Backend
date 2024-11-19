@@ -3,6 +3,8 @@ const app = express();
 
 import config from "./src/config/config.json" assert { type: 'json' };
 import userRouter from "./src/router/userRoutes.js";
+import professionalRoutes from "./src/router/professionalRoutes.js";
+import customerRoutes from "./src/router/customerRoutes.js";
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -10,6 +12,8 @@ app.use(express.urlencoded({extended:true}));
 
 
 app.use("/user", userRouter);
+app.use("/pro", professionalRoutes);
+app.use("/customer", customerRoutes);
 
 
 

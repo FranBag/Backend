@@ -50,7 +50,6 @@ export const update_user = async(req, res) => {
 			return;
 		}
 		res.json("Ha ocurrido un error al modificar el usuario")
-		res.json(result);
 	} catch (error) {
 		res.json(error.message);
 	}
