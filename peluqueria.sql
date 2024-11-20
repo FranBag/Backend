@@ -52,7 +52,7 @@ id_customer int unsigned,
 id_service tinyint unsigned,
 id_schedule mediumint unsigned,
 /*TERMINAR el enum*/
-state enum("RESERVADO", "FINALIZADO", "CANCELADO"),
+state enum("RESERVADO", "FINALIZADO", "CANCELADO")  DEFAULT "RESERVADO",
 `date` date not null,
 foreign key(id_customer) references customer(id_customer) on delete set null,
 foreign key(id_service) references service(id_service) on delete set null,
@@ -139,7 +139,7 @@ INSERT INTO schedules (week_days, start_hour, end_hour) VALUES
 ("SABADO", "11:00:00", "11:30:00"), ("SABADO", "11:30:00", "12:00:00");
 
 
--- Inserciones de users
+-- Inserciones de usuarios
 INSERT INTO `user`(name, email, phone_number, pass) VALUES
 ("Luciana Gómez", "luciana.gomez@gmail.com", "3764123457", "lucy123"),
 ("Mateo Ramírez", "mateo.ramirez@yahoo.com", "3764123458", "ramirezpass"),
@@ -147,23 +147,30 @@ INSERT INTO `user`(name, email, phone_number, pass) VALUES
 ("Juan Pérez", "juan.perez@gmail.com", "3764123460", "juanpass2024"),
 ("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "camilasecreta");
 
+-- Inserciones de servicios
 INSERT INTO service(name, description, price, duration) VALUES
 ("A", "Hace A", 15000, 2),
 ("B", "Hace B", 7500, 1),
 ("C", "Hace C", 20000, 3),
 ("D", "Hace D", 10000, 2);
 
--- Inserciones de professionales
+-- Inserciones de profesionales
 INSERT INTO professional(id_user, specialty) VALUES
 (2, 2),
 (4, 4);
 
-
--- Inserciones de customers
+-- Inserciones de clientes
 INSERT INTO customer(id_user) VALUES
 (1),
 (3),
 (5);
+
+-- Inserciones de reservas
+INSERT INTO reservation(id_customer,id_service ,id_schedule ,state, date) VALUES
+(1, 3, 8, "RESERVADO", "2024-05-21"),
+(2, 1, 20, "CANCELADO", "2024-07-31"),
+(3, 2, 44, "FINALIZADO", "2024-1-5");
+
 
 SELECT * FROM schedules WHERE week_days = "LUNES" OR week_days = "SABADO";
 
@@ -171,6 +178,12 @@ SELECT * FROM `user`;
 
 SELECT * FROM professional;
 
+SELECT * FROM customer;
+
 SELECT * FROM professional INNER JOIN `user` ON professional.id_user = user.id_user;
 
 SELECT * FROM customer INNER JOIN `user` ON customer.id_user = user.id_user;
+
+SELECT * FROM reservation;
+
+SELECT * FROM service;

@@ -6,6 +6,7 @@ import userRouter from "./src/router/userRoutes.js";
 import professionalRoutes from "./src/router/professionalRoutes.js";
 import customerRoutes from "./src/router/customerRoutes.js";
 import serviceRoutes from "./src/router/serviceRoutes.js";
+import reservationRoutes from "./src/router/reservationRoutes.js";
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -16,6 +17,7 @@ app.use("/user", userRouter);
 app.use("/pro", professionalRoutes);
 app.use("/customer", customerRoutes);
 app.use("/service", serviceRoutes);
+app.use("/reserv", reservationRoutes);
 
 
 

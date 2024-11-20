@@ -67,3 +67,4 @@ export const delete_service = async(req, res) => {
 		res.json(error.message);
 	}
 }
+
