@@ -3,6 +3,15 @@ CREATE DATABASE integrador;
 USE integrador;
 
 
+CREATE TABLE service(
+id_service tinyint unsigned auto_increment primary key,
+`name` varchar(60) not null,
+`description` text,
+price int not null,
+duration tinyint not null /*duración en numero, por ej: duration=2, significa
+que ocupa dos unidades de turno osea dos hora y media = 1 hora*/
+);
+
 CREATE TABLE `user`(
 id_user int unsigned auto_increment primary key,
 email varchar(80) unique not null,
@@ -22,21 +31,11 @@ foreign key(id_user) references `user`(id_user) on delete set null
 CREATE TABLE professional(
 id_professional int unsigned auto_increment primary key,
 id_user int unsigned,
-specialty enum("COMER", "SALTAR", "CORRER", "CAMINAR"), /*Arreglar y poner enums con sentido*/
-foreign key(id_user) references `user`(id_user) on delete set null
+specialty tinyint unsigned,
+foreign key(id_user) references `user`(id_user) on delete set null,
+foreign key(specialty) references service(id_service) on delete set null
 );
 
-
-CREATE TABLE service(
-id_service tinyint unsigned auto_increment primary key,
-id_professional int unsigned,
-`name` varchar(60) not null,
-`description` text,
-price int not null,
-duration tinyint not null, /*duración en numero, por ej: duration=2, significa
-que ocupa dos unidades de turno osea dos hora y media = 1 hora*/
-foreign key(id_professional) references professional(id_professional) on delete set null
-);
 
 
 CREATE TABLE schedules(
@@ -148,11 +147,16 @@ INSERT INTO `user`(name, email, phone_number, pass) VALUES
 ("Juan Pérez", "juan.perez@gmail.com", "3764123460", "juanpass2024"),
 ("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "camilasecreta");
 
+INSERT INTO service(name, description, price, duration) VALUES
+("A", "Hace A", 15000, 2),
+("B", "Hace B", 7500, 1),
+("C", "Hace C", 20000, 3),
+("D", "Hace D", 10000, 2);
 
 -- Inserciones de professionales
 INSERT INTO professional(id_user, specialty) VALUES
-(2, "SALTAR"),
-(4, "CORRER");
+(2, 2),
+(4, 4);
 
 
 -- Inserciones de customers

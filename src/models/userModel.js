@@ -1,4 +1,4 @@
-import { updateManager } from "../others/updateManager.js";
+import { updateUserManager } from "../others/updateUserManager.js";
 import db from "./../config/dbConection.js";
 
 export async function getAll(){
@@ -46,7 +46,7 @@ export async function createOne(data){ //CONTRASEÑA TIENE QUE ESTAR ENCRIPTADA
 
 export async function updateOne(id, updatedData){
     try{
-        const {updatedQuery, params} = updateManager(updatedData); // Solo modifica el campo necesario.
+        const {updatedQuery, params} = updateUserManager(updatedData); // Solo modifica el campo necesario.
         params.push(id)
         const query = `UPDATE \`user\` SET ${updatedQuery} WHERE id_user = ?`;
         const [result] = await db.execute(query, params);

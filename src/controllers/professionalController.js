@@ -16,7 +16,7 @@ export const update_specialty = async(req, res) => {
 		const update_specialty = req.body.data;
 		const result = await updatespecialty(id_professional, update_specialty);
 		if(result.affectedRows == 1){
-			res.json(`Se ha modificado la especialidad del profesional con ID ${id_professional} ha ${update_specialty.specialty} correctamente`);
+			res.json(`Se ha modificado la especialidad del profesional con ID ${id_professional} correctamente`);
 			return;
 		}
         res.json(`No se ha encontrado un profesional con el id ${id_professional}`);

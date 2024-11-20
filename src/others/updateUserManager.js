@@ -1,4 +1,4 @@
-export const updateManager = (data) => {
+export const updateUserManager = (data) => {
     let updatedQuery = "";
     const params = [];
     if(data.name){
@@ -29,6 +29,6 @@ const datos = {
     pass:"pepito123"
 }
 
-const {updatedQuery, params} = updateManager(datos);
+const {updatedQuery, params} = updateUserManager(datos);
 
 */

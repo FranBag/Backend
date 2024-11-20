@@ -18,8 +18,8 @@ export async function updatespecialty(id, updatedspecialty){
         return result;
     }catch(error){
         console.log(error); //ARREGLAR, TENGO QUE PREGUNTARME QUE ERROR ES, SI ES TAL DIGO TAL COSA, SI NO OTRA COSA.
-        if(error.code == "WARN_DATA_TRUNCATED"){
-            throw new Error("Especialidad no válida, pruebe con una especialidad correcta");
+        if(error.code == "ER_TRUNCATED_WRONG_VALUE_FOR_FIELD"){
+            throw new Error("Especialidad no válida, pruebe con un id de servicio correcto");
         }
         throw new Error("Error al actualizar la especialidad del profesional:" + error.code);
     }
