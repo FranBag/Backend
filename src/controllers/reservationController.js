@@ -14,7 +14,7 @@ export const get_reservation_by_id = async(req, res) => {
 	try {
 		const id_reservation = req.params.id;
 		const reservation = await getOneByID(id_reservation);
-		if(JSON.stringify(reservation) == "[]"){
+		if(reservation.length == 0){
 			res.json(`No se ha encontrado una reserva con el id ${id_reservation}`);
 			return;
 		}
@@ -28,7 +28,7 @@ export const get_reservation_by_customer = async(req, res) => {
 	try {
 		const id_customer= req.params.id;
 		const reservation = await getOneByCustomer(id_customer);
-		if(JSON.stringify(reservation) == "[]"){
+		if(reservation.length == 0){
 			res.json(`No se ha encontrado una reserva del cliente`);
 			return;
 		}
@@ -42,7 +42,7 @@ export const get_reservation_by_service = async(req, res) => {
 	try {
 		const id_service = req.params.id;
 		const reservation = await getOneByService(id_service);
-		if(JSON.stringify(reservation) == "[]"){
+		if(reservation.length == 0){
 			res.json(`No se ha encontrado una reserva con el servicio especificado`);
 			return;
 		}

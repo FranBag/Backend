@@ -7,5 +7,6 @@
         "user": "root",
         "password": "admin",
         "database": "integrador"
-    }
+    },
+    "encrypt_key":"SuperImposibleDeHackear123"
 }

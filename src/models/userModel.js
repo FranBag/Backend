@@ -23,6 +23,47 @@ export async function getOneByID(id){
     }
 }
 
+export async function getOneByEmail(email){
+    try{
+        if(email){
+            const query = "SELECT * FROM user WHERE email = ?";
+            const [rows] = await db.execute(query, [email]);
+            if(rows.length == 0){
+                throw new Error(`No se ha encontrado un usuario con el email ${email}`);
+            }
+            return rows;
+        }else{
+            throw new Error(`El email no puede ser indefinido`);
+        }
+
+    } catch(error){
+        console.log(error);
+        throw new Error("Error al obtener el usuario: " + error);
+    }
+}
+
+
+export async function getUserRole(id_user){
+    try{
+        const query1 = "SELECT id_customer FROM customer WHERE id_user = ?";
+        const [customer] = await db.execute(query1, [id_user]);
+        if(customer.length > 0) {
+            return "customer";
+        }
+
+        const query2 = "SELECT id_professional FROM professional WHERE id_user = ?";
+        const [professional] = await db.execute(query2, [id_user]);
+        if(professional.length > 0) {
+            return "professional";
+        }
+
+        throw new Error("El usuario no existe o no tiene rol");
+    }catch(error){
+        console.log(error);
+        throw new Error("Error al determinar el rol del usuario: " + error.message);
+    }
+}
+
 export async function createOne(data){ //CONTRASEÑA TIENE QUE ESTAR ENCRIPTADA
     const params = [
         data.name,

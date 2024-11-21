@@ -14,7 +14,7 @@ export const get_service = async(req, res) => {
 	try {
 		const id_service = req.params.id;
 		const service = await getOneByID(id_service);
-		if(JSON.stringify(service) == "[]"){
+		if(service.length == 0){
 			res.json(`No se ha encontrado un servicio con el id ${id_service}`);
 			return;
 		}

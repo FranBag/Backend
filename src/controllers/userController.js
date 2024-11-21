@@ -1,4 +1,11 @@
-import { createOne, deleteOne, getAll, getOneByID, updateOne } from "../models/userModel.js";
+import config from "./../config/config.json" assert { type: 'json' };;
+import { createOne, deleteOne, getAll, getOneByEmail, getOneByID, getUserRole, updateOne } from "../models/userModel.js";
+import bc from "bcryptjs";
+import jwt from 'jsonwebtoken';
+
+const { compareSync } = bc;
+const { sign } = jwt;
+
 import validator, { param } from "express-validator";
 
 // AGREGAR HTTP CODES 200, 404, 500, etc.
@@ -16,7 +23,7 @@ export const get_user = async(req, res) => {
 	try {
 		const id_user = req.params.id;
 		const user = await getOneByID(id_user);
-		if(JSON.stringify(user) == "[]"){
+		if(user.length == 0){
 			res.json(`No se ha encontrado un usuario con el id ${id_user}`);
 			return;
 		}
@@ -65,6 +72,39 @@ export const delete_user = async(req, res) => {
 		}
 		res.json(`No se ha encontrado un usuario con el ID ${id_user}`);
 	} catch (error) {
+		res.json(error.message);
+	}
+}
+
+export const login = async(req,res) => {
+	try {
+		const {mail, pass} = req.body.data;
+		const [result] = await getOneByEmail(mail);
+		const isSame = compareSync(pass, result.pass);
+		if(isSame){
+
+			const role = await getUserRole(result.id_user);
+
+			let user = {
+				mail: result.mail,
+				role: role
+			}
+			sign(user, config.encrypt_key, {expiresIn: "600s"}, (error, token) => {
+				if(error){
+					res.json(error.message);
+				}else{
+					res.json({data: user, credentials: token});
+				}
+			})		
+		}else{
+			res.json("Contraseña incorrecta");
+		}
+	} catch (error) {
+		console.log(error);
+		if(error.message == "Illegal arguments: undefined, string"){
+			res.json("La contraseña no puede estar indefinida")
+			return;
+		}
 		res.json(error.message);
 	}
 }
