@@ -48,9 +48,9 @@ export async function updateOne(id, updatedData){
         const [result] = await db.execute(query, params);
         return result;
     }catch(error){
-        console.log(error); //ARREGLAR, TENGO QUE PREGUNTARME QUE ERROR ES, SI ES TAL DIGO TAL COSA, SI NO OTRA COSA.
+        console.log(error);
         if(error.code == "WARN_DATA_TRUNCATED"){
-            throw new Error("Datos ingresados inválidos:");
+            throw new Error("Datos ingresados inválidos");
         }
         throw new Error("Error al actualizar el usuario:" + error.code);
     }
@@ -58,7 +58,7 @@ export async function updateOne(id, updatedData){
 
 export async function deleteOne(id){
     try{
-        const query = "DELETE FROM service WHERE id_service = ?"; // CAPAZ NO FUNCIONE POR LAS RELACIONES ENTRE TABLAS.
+        const query = "DELETE FROM service WHERE id_service = ?";
         const [result] = await db.execute(query, [id]);
         return result;
     }catch(error){

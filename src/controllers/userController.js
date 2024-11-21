@@ -78,15 +78,15 @@ export const delete_user = async(req, res) => {
 
 export const login = async(req,res) => {
 	try {
-		const {mail, pass} = req.body.data;
-		const [result] = await getOneByEmail(mail);
+		const {email, pass} = req.body.data;
+		const [result] = await getOneByEmail(email);
 		const isSame = compareSync(pass, result.pass);
 		if(isSame){
 
 			const role = await getUserRole(result.id_user);
 
 			let user = {
-				mail: result.mail,
+				email: result.email,
 				role: role
 			}
 			sign(user, config.encrypt_key, {expiresIn: "600s"}, (error, token) => {
