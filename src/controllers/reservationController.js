@@ -1,4 +1,4 @@
-import { createOne, getAll, getOneByCustomer, getOneByID, getOneByService } from "../models/reservationModel.js";
+import { createOne, getAll, getOneByCustomer, getOneByID, getOneByService, updateOne } from "../models/reservationModel.js";
 
 
 export const get_all_reservations = async(req, res) => {
@@ -61,6 +61,21 @@ export const create_reservation = async(req, res) => {
 			return;
 		}
 		res.json("Ha ocurrido un error al crear la reserva")
+	} catch (error) {
+		res.json(error.message);
+	}
+}
+
+export const update_reservation = async(req, res) => {
+	try {
+		const id_reservation = req.params.id;
+		const update_reservation_data = req.body.data;
+		const result = await updateOne(id_reservation, update_reservation_data);
+		if(result.affectedRows == 1){
+			res.json(`Se ha modificado la reserva con ID ${id_reservation} correctamente`);
+			return;
+		}
+		res.json("Ha ocurrido un error al modificar la reserva")
 	} catch (error) {
 		res.json(error.message);
 	}

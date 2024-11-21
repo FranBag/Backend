@@ -8,8 +8,7 @@ id_service tinyint unsigned auto_increment primary key,
 `name` varchar(60) not null,
 `description` text,
 price int not null,
-duration tinyint not null /*duración en numero, por ej: duration=2, significa
-que ocupa dos unidades de turno osea dos hora y media = 1 hora*/
+duration tinyint not null
 );
 
 CREATE TABLE `user`(
@@ -51,7 +50,6 @@ id_reservation int unsigned auto_increment primary key,
 id_customer int unsigned,
 id_service tinyint unsigned,
 id_schedule mediumint unsigned,
-/*TERMINAR el enum*/
 state enum("RESERVADO", "FINALIZADO", "CANCELADO")  DEFAULT "RESERVADO",
 `date` date not null,
 foreign key(id_customer) references customer(id_customer) on delete set null,
@@ -65,7 +63,7 @@ id_bill int unsigned auto_increment primary key,
 id_customer int unsigned,
 id_reservation int unsigned,
 amount int unsigned not null,
-issue_date datetime, /*el backend le manda la fecha y hora en la que se hizo*/
+issue_date datetime,
 foreign key(id_customer) references customer(id_customer) on delete set null,
 foreign key(id_reservation) references reservation(id_reservation) on delete set null
 );

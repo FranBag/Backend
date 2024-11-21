@@ -1,8 +1,19 @@
 /////////////////////////////
-/// TERMINAR PONER UPDATE ///
+///   SANITIZADOR FECHA   ///
 /////////////////////////////
 
 import db from "./../config/dbConection.js";
+import { updateReservationManager } from "./../others/updateReservationManager.js"
+
+
+// convertirFecha = (date) => {
+//     const fecha = new Date(date);
+//     const dia = fecha.getUTCDate().toString().padStart(2, '0');
+//     const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, '0');
+//     const anio = fecha.getUTCFullYear();
+//     return `${anio}-${mes}-${dia}`;
+// }
+
 
 
 export async function getAll(){
@@ -67,5 +78,18 @@ export async function createOne(data){
             throw new Error("Datos ingresados incorrectos, por favor intente nuevamente con datos correctos");
         } 
         throw new Error("Error al crear la reserva:" + error.code);
+    }
+}
+
+export async function updateOne(id, updatedData){
+    try{
+        const {updatedQuery, params} = updateReservationManager(updatedData); // Solo modifica el campo necesario.
+        params.push(id)
+        const query = `UPDATE reservation SET ${updatedQuery} WHERE id_reservation = ?`;
+        const [result] = await db.execute(query, params);
+        return result;
+    }catch(error){
+        console.log(error);
+        throw new Error("Error al actualizar la reserva:" + error.code);
     }
 }
