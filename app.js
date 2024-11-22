@@ -1,5 +1,8 @@
 import express, {json} from "express";
+import cors from "cors";
+
 const app = express();
+app.use(cors());
 
 import config from "./src/config/config.json" assert { type: 'json' };
 import userRouter from "./src/router/userRoutes.js";

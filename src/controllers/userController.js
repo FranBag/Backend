@@ -87,6 +87,7 @@ export const login = async (req, res) => {
             const role = await getUserRole(result.id_user);
 
             const user = {
+                name: result.name,
                 email: result.email,
                 role: role,
             };
