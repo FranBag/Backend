@@ -12,8 +12,8 @@ export const userCreateRules = [
     body("data.email")
         .exists().withMessage("Debe proporcionar un email(email)")
         .notEmpty().withMessage("Debe proporcionar un email no vacío")
-        .isEmail().withMessage("Debe proporcionar un email válido")
-        .normalizeEmail(),
+        .isEmail().withMessage("Debe proporcionar un email válido"),
+        // .normalizeEmail(),
     body("data.phone_number")
         .exists().withMessage("Debe proporcionar un número de telefono(phone_number)")
         .notEmpty().withMessage("Debe proporcionar un número de telefono no vacío")
@@ -28,8 +28,8 @@ export const userLoginRules = [
     body("data.email")
         .exists().withMessage("Debe proporcionar un email(email)")
         .notEmpty().withMessage("Debe proporcionar un email no vacío")
-        .isEmail().withMessage("Debe proporcionar un email válido")
-        .normalizeEmail(),
+        .isEmail().withMessage("Debe proporcionar un email válido"),
+        //.normalizeEmail(), <- Tuve que sacar porque me quitaba los puntos de los emails
     body("data.pass")
         .exists().withMessage("Debe proporcionar una contraseña(pass)")
         .notEmpty().withMessage("Debe proporcionar una contraseña no vacía")
@@ -58,13 +58,15 @@ export const userUpdateRules = [
 ];
 
 export const validate = (req, res, next) => {
-
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.json({ errors: errors.array() });
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ 
+            errors: errors.array(), 
+            message: "Errores de validación en la solicitud" 
+        });
     }
     next();
-}
+};
 
 export const isAutenticated = (req, res, next) => {
     if(req.headers["authorization"]){
@@ -74,12 +76,19 @@ export const isAutenticated = (req, res, next) => {
             if(verified){
                 next();
             }else{
-                res.json("Token inválido");
+                return res.status(403).json({
+                    message: "Token inválido, acceso denegado"
+                });
             }
         }catch(error){
-            res.json(error.message);
+        return res.status(403).json({
+            message: "Error al verificar el token",
+            error: error.message
+        });
         }
     }else{
-        return res.json("Necesitas un token de autorización, porfavor logueate");
+        return res.status(401).json({
+            message: "Necesitas un token de autorización, por favor inicia sesión"
+        });
     }
 }

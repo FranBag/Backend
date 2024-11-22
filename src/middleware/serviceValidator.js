@@ -19,7 +19,7 @@ export const serviceCreateRules = [
     body("data.duration")
         .exists().withMessage("Debe proporcionar una duración (duration)")
         .notEmpty().withMessage("Debe proporcionar una duración no vacía")
-        .isInt({ min: 1, max: 50}).withMessage("La duración debe ser un número entero entre 1 y 50(unidades de turno 1 = 30 minutos)")
+        .isInt({ min: 1, max: 50}).withMessage("La duración debe ser un número entero entre 1 y 50.")
 ];
 
 export const serviceUpdateRules = [
@@ -48,7 +48,10 @@ export const validate = (req, res, next) => {
 
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        return res.json({ errors: errors.array() });
+        return res.status(400).json({ 
+            errors: errors.array(), 
+            message: "Errores de validación en la solicitud" 
+        });
     }
     next();
 }

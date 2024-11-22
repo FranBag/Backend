@@ -93,7 +93,7 @@ INSERT INTO schedules (week_days, start_hour, end_hour) VALUES
 ("MARTES", "18:00:00", "18:30:00"), ("MARTES", "18:30:00", "19:00:00"),
 ("MARTES", "19:00:00", "19:30:00"), ("MARTES", "19:30:00", "20:00:00");
 
--- schedules de miercoles(8:00 a 12:00 y 16:00 a 20:00)
+-- schedules de miercoles(8:00 a 12:reservationuser00 y 16:00 a 20:00)
 INSERT INTO schedules (week_days, start_hour, end_hour) VALUES
 ("MIERCOLES", "08:00:00", "08:30:00"), ("MIERCOLES", "08:30:00", "09:00:00"),
 ("MIERCOLES", "09:00:00", "09:30:00"), ("MIERCOLES", "09:30:00", "10:00:00"),
@@ -139,11 +139,11 @@ INSERT INTO schedules (week_days, start_hour, end_hour) VALUES
 
 -- Inserciones de usuarios
 INSERT INTO `user`(name, email, phone_number, pass) VALUES
-("Luciana Gómez", "luciana.gomez@gmail.com", "3764123457", "lucy123"),
-("Mateo Ramírez", "mateo.ramirez@yahoo.com", "3764123458", "ramirezpass"),
-("Valentina Ortiz", "valentina.ortiz@outlook.com", "3764123459", "valentinapass"),
-("Juan Pérez", "juan.perez@gmail.com", "3764123460", "juanpass2024"),
-("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "camilasecreta");
+("Luciana Gómez", "luciana.gomez@gmail.com", "3764123457", "$2y$10$eAaXSj0pNCFBmEl7Hk6.dOYxvMdda79jgRl1sEedgpE4ZK7X5kneO"),
+("Mateo Ramírez", "mateo.ramirez@yahoo.com", "3764123458", "$2y$10$DJx0CoZInRO8te.XcJ6flu8Yvn6hXECduEL7NYf7wfXrkUZU/3Asy"),
+("Valentina Ortiz", "valentina.ortiz@outlook.com", "3764123459", "$2y$10$T4SSoD2gY6m4b/RZqBIS/uhcCRPgu8DVsBLKap5UHVdpiTFjRBZI."),
+("Juan Pérez", "juan.perez@gmail.com", "3764123460", "$2y$10$wSl1NyhipOPV.sUOwFTPXOoiU.OrUQue8u10pFmRSkxdz4cs4LJZ6"),
+("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "$2y$10$V6/DTbwnOZLQmZy1wzQ5qeAB/BOA7h6RogHp7kgHEY1Au/ZYIEKe2");
 
 -- Inserciones de servicios
 INSERT INTO service(name, description, price, duration) VALUES
@@ -173,6 +173,8 @@ INSERT INTO reservation(id_customer,id_service ,id_schedule ,state, date) VALUES
 SELECT * FROM schedules WHERE week_days = "LUNES" OR week_days = "SABADO";
 
 SELECT * FROM `user`;
+
+UPDATE `user` SET email = "luciana.gomez@gmail.com" WHERE id_user = 1;
 
 SELECT * FROM professional;
 
