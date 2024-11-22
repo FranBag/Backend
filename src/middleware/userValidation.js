@@ -1,5 +1,6 @@
-import { body, check, param, query, validationResult } from "express-validator"
+import { body, validationResult } from "express-validator"
 import jwt from 'jsonwebtoken';
+import config from "./../config/config.json" assert { type: 'json' };
 
 export const userCreateRules = [
     body("data.name")
@@ -63,4 +64,22 @@ export const validate = (req, res, next) => {
         return res.json({ errors: errors.array() });
     }
     next();
+}
+
+export const isAutenticated = (req, res, next) => {
+    if(req.headers["authorization"]){
+        try{
+            const token = req.headers["authorization"];
+            const verified = jwt.verify(token, config.encrypt_key);
+            if(verified){
+                next();
+            }else{
+                res.json("Token inválido");
+            }
+        }catch(error){
+            res.json(error.message);
+        }
+    }else{
+        return res.json("Necesitas un token de autorización, porfavor logueate");
+    }
 }

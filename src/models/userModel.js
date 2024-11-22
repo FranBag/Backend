@@ -93,7 +93,7 @@ export async function updateOne(id, updatedData){
         const [result] = await db.execute(query, params);
         return result;
     }catch(error){
-        console.log(error); //ARREGLAR, TENGO QUE PREGUNTARME QUE ERROR ES, SI ES TAL DIGO TAL COSA, SI NO OTRA COSA.
+        console.log(error); 
         if(error.code == "ER_DUP_ENTRY"){
             throw new Error(`El email ${updatedData.email} ya está en uso, pruebe con un email diferente`);    
         }
@@ -103,7 +103,7 @@ export async function updateOne(id, updatedData){
 
 export async function deleteOne(id){
     try{
-        const query = "DELETE FROM user WHERE id_user = ?"; // CAPAZ NO FUNCIONE POR LAS RELACIONES ENTRE TABLAS.
+        const query = "DELETE FROM user WHERE id_user = ?"; 
         const [result] = await db.execute(query, [id]);
         return result;
     }catch(error){

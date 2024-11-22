@@ -1,4 +1,4 @@
-import config from "./../config/config.json" assert { type: 'json' };;
+import config from "./../config/config.json" assert { type: 'json' };
 import { createOne, deleteOne, getAll, getOneByEmail, getOneByID, getUserRole, updateOne } from "../models/userModel.js";
 import bc from "bcryptjs";
 import jwt from 'jsonwebtoken';
