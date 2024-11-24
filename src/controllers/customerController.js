@@ -10,6 +10,20 @@ export const get_all_customers = async (req, res) => {
     }
 };
 
+export const get_customer = async (req, res) => {
+    try {
+        const id_customer = req.params.id;
+        const customer = await getOneByID(id_customer);
+        if (customer.length === 0) {
+            res.status(404).json({ message: `No se ha encontrado un cliente con el ID ${id_customer}` });
+            return;
+        }
+        res.status(200).json(customer); 
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export const delete_customer = async (req, res) => {
     try {
         const id_customer = req.params.id;

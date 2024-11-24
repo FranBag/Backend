@@ -11,6 +11,17 @@ export async function getAll(){
     }
 }
 
+export async function getOneByID(id){
+    try{
+        const query = "SELECT * FROM customer INNER JOIN `user` ON customer.id_user = `user`.id_user WHERE id_customer = ?";
+        const [rows] = await db.execute(query, [id]);
+        return rows;
+    } catch(error){
+        console.log(error);
+        throw new Error("Error al obtener el cliente: " + error.code);
+    }
+}
+
 export async function deleteOne(id){
     try{
         const query = "DELETE FROM customer WHERE id_customer = ?"; // CAPAZ NO FUNCIONE POR LAS RELACIONES ENTRE TABLAS.

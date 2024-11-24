@@ -178,14 +178,15 @@ UPDATE `user` SET email = "luciana.gomez@gmail.com" WHERE id_user = 1;
 
 SELECT * FROM professional;
 
-SELECT * FROM customer;
+SELECT * FROM customer INNER JOIN `user` ON customer.id_user = `user`.id_user;
 
 SELECT * FROM professional INNER JOIN `user` ON professional.id_user = user.id_user;
 
 SELECT * FROM customer INNER JOIN `user` ON customer.id_user = user.id_user;
 
-SELECT reservation.id_customer, reservation.id_service, reservation.id_schedule, reservation.state date FROM reservation
+SELECT reservation.id_reservation, reservation.id_customer, reservation.id_service, reservation.id_schedule, reservation.state, reservation.date
+FROM reservation
 INNER JOIN service ON reservation.id_service = service.id_service
-INNER JOIN professional ON service.id_service = professional.specialty;
+INNER JOIN professional ON service.id_service = professional.specialty WHERE professional.id_user = 2;
 
 SELECT * FROM service;

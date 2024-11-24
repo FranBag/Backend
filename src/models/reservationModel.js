@@ -51,7 +51,7 @@ export async function getOneByCustomer(id){
 
 export async function getOneByProfessional(id){
     try{
-        const query = `SELECT reservation.id_customer, reservation.id_service, reservation.id_schedule, reservation.state, reservation.date
+        const query = `SELECT reservation.id_reservation, reservation.id_customer, reservation.id_service, reservation.id_schedule, reservation.state, reservation.date
         FROM reservation
         INNER JOIN service ON reservation.id_service = service.id_service
         INNER JOIN professional ON service.id_service = professional.specialty WHERE professional.id_user = ?;`;
