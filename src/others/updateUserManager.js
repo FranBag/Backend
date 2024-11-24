@@ -17,18 +17,5 @@ export const updateUserManager = (data) => {
         updatedQuery += (updatedQuery ? ", " : "") + "pass = ?";
         params.push(data.pass)
     }
-    console.log(updatedQuery)
     return{updatedQuery, params};
 }
-
-/* prueba
-const datos = {
-    name:"hola",
-    email:"asdfa@asdsa.com",
-    phone_number:"12345678",
-    pass:"pepito123"
-}
-
-const {updatedQuery, params} = updateUserManager(datos);
-
-*/

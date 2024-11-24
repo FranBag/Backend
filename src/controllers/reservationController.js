@@ -32,7 +32,6 @@ export const get_reservations_by_customer = async (req, res) => {
             res.status(404).json({ message: "No se ha encontrado una reserva del cliente" });
             return;
         }
-        console.log(reservation)
         res.status(200).json(reservation);
     } catch (error) {
         res.status(500).json({ message: error.message });

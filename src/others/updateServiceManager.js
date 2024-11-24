@@ -17,6 +17,5 @@ export const updateServiceManager = (data) => {
         updatedQuery += (updatedQuery ? ", " : "") + "duration = ?";
         params.push(data.duration)
     }
-    console.log(updatedQuery)
     return{updatedQuery, params};
 }

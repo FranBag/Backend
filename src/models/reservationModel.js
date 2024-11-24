@@ -50,17 +50,20 @@ export async function getByCustomer(id){
 
 export async function getByProfessional(id){
     try{
-        const query = `SELECT
+        const query = `SELECT 
             r.id_reservation,
-            r.id_customer,
-            r.id_service,
-            r.id_schedule,
+            u.\`name\` AS customer,
+            s.\`name\` AS service,
+            sch.start_hour AS \`schedule\`,
             r.state,
             r.\`date\`
             FROM reservation r
+            INNER JOIN customer c ON r.id_customer = c.id_customer
+            INNER JOIN \`user\` u ON c.id_user = u.id_user
             INNER JOIN service s ON r.id_service = s.id_service
+            INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
             INNER JOIN professional p ON s.id_service = p.specialty
-            WHERE p.id_user = 2`;
+            WHERE p.id_user = 4;`;
             
         const [rows] = await db.execute(query, [id]);
         return rows;

@@ -21,6 +21,5 @@ export const updateReservationManager = (data) => {
         updatedQuery += (updatedQuery ? ", " : "") + "date = ?";
         params.push(data.date)
     }
-    console.log(updatedQuery)
     return{updatedQuery, params};
 }
