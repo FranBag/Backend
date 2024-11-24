@@ -184,6 +184,8 @@ SELECT * FROM professional INNER JOIN `user` ON professional.id_user = user.id_u
 
 SELECT * FROM customer INNER JOIN `user` ON customer.id_user = user.id_user;
 
-SELECT * FROM reservation;
+SELECT reservation.id_customer, reservation.id_service, reservation.id_schedule, reservation.state date FROM reservation
+INNER JOIN service ON reservation.id_service = service.id_service
+INNER JOIN professional ON service.id_service = professional.specialty;
 
 SELECT * FROM service;

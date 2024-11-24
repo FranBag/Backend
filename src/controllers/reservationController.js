@@ -1,4 +1,4 @@
-import { createOne, getAll, getOneByCustomer, getOneByID, getOneByService, updateOne } from "../models/reservationModel.js";
+import { createOne, getAll, getOneByCustomer, getOneByID, getOneByProfessional, updateOne } from "../models/reservationModel.js";
 
 
 export const get_all_reservations = async (req, res) => {
@@ -38,12 +38,12 @@ export const get_reservation_by_customer = async (req, res) => {
     }
 };
 
-export const get_reservation_by_service = async (req, res) => {
+export const get_reservation_by_professional = async (req, res) => {
     try {
         const id_service = req.params.id;
-        const reservation = await getOneByService(id_service);
+        const reservation = await getOneByProfessional(id_service);
         if (reservation.length === 0) {
-            res.status(404).json({ message: "No se ha encontrado una reserva con el servicio especificado" });
+            res.status(404).json({ message: "No se ha encontrado una reserva con el profesional especificado" });
             return;
         }
         res.status(200).json(reservation);
