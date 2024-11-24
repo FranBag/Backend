@@ -1,19 +1,5 @@
-/////////////////////////////
-///   SANITIZADOR FECHA   ///
-/////////////////////////////
-
 import db from "./../config/dbConection.js";
 import { updateReservationManager } from "./../others/updateReservationManager.js"
-
-
-// convertirFecha = (date) => {
-//     const fecha = new Date(date);
-//     const dia = fecha.getUTCDate().toString().padStart(2, '0');
-//     const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, '0');
-//     const anio = fecha.getUTCFullYear();
-//     return `${anio}-${mes}-${dia}`;
-// }
-
 
 
 export async function getAll(){
@@ -38,9 +24,22 @@ export async function getOneByID(id){
     }
 }
 
-export async function getOneByCustomer(id){
+export async function getByCustomer(id){
     try{
-        const query = "SELECT * FROM reservation WHERE id_customer = ?";
+        const query = `SELECT 
+            r.id_reservation,
+            r.id_customer,
+            s.\`name\` AS service,
+            sch.start_hour AS \`schedule\`,
+            r.state,
+            r.\`date\`
+            FROM reservation r
+            INNER JOIN customer c ON r.id_customer = c.id_customer
+            INNER JOIN \`user\` u ON c.id_user = u.id_user
+            INNER JOIN service s ON r.id_service = s.id_service
+            INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
+            WHERE r.id_customer = ?`;
+
         const [rows] = await db.execute(query, [id]);
         return rows;
     } catch(error){
@@ -49,12 +48,20 @@ export async function getOneByCustomer(id){
     }
 }
 
-export async function getOneByProfessional(id){
+export async function getByProfessional(id){
     try{
-        const query = `SELECT reservation.id_reservation, reservation.id_customer, reservation.id_service, reservation.id_schedule, reservation.state, reservation.date
-        FROM reservation
-        INNER JOIN service ON reservation.id_service = service.id_service
-        INNER JOIN professional ON service.id_service = professional.specialty WHERE professional.id_user = ?;`;
+        const query = `SELECT
+            r.id_reservation,
+            r.id_customer,
+            r.id_service,
+            r.id_schedule,
+            r.state,
+            r.\`date\`
+            FROM reservation r
+            INNER JOIN service s ON r.id_service = s.id_service
+            INNER JOIN professional p ON s.id_service = p.specialty
+            WHERE p.id_user = 2`;
+            
         const [rows] = await db.execute(query, [id]);
         return rows;
     } catch(error){

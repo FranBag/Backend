@@ -1,4 +1,4 @@
-import { createOne, getAll, getOneByCustomer, getOneByID, getOneByProfessional, updateOne } from "../models/reservationModel.js";
+import { createOne, getAll, getByCustomer, getOneByID, getByProfessional, updateOne } from "../models/reservationModel.js";
 
 
 export const get_all_reservations = async (req, res) => {
@@ -24,24 +24,25 @@ export const get_reservation_by_id = async (req, res) => {
     }
 };
 
-export const get_reservation_by_customer = async (req, res) => {
+export const get_reservations_by_customer = async (req, res) => {
     try {
         const id_customer = req.params.id;
-        const reservation = await getOneByCustomer(id_customer);
+        const reservation = await getByCustomer(id_customer);
         if (reservation.length === 0) {
             res.status(404).json({ message: "No se ha encontrado una reserva del cliente" });
             return;
         }
+        console.log(reservation)
         res.status(200).json(reservation);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-export const get_reservation_by_professional = async (req, res) => {
+export const get_reservations_by_professional = async (req, res) => {
     try {
         const id_service = req.params.id;
-        const reservation = await getOneByProfessional(id_service);
+        const reservation = await getByProfessional(id_service);
         if (reservation.length === 0) {
             res.status(404).json({ message: "No se ha encontrado una reserva con el profesional especificado" });
             return;

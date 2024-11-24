@@ -1,5 +1,5 @@
 import Router from "express";
-import { delete_customer, get_all_customers } from "../controllers/customerController.js";
+import { delete_customer, get_all_customers, get_customer } from "../controllers/customerController.js";
 import { idRules, validate } from "../middleware/idValidator.js";
 import { isAutenticated } from "../middleware/userValidation.js";
 const router = Router();
