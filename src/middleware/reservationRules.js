@@ -1,10 +1,10 @@
 import { body, check, param, query, validationResult } from "express-validator"
 
 export const reservationCreateRules = [
-    body("data.id_customer")
-        .exists().withMessage("Debe proporcionar el ID del cliente (id_customer)")
-        .notEmpty().withMessage("El ID del cliente no puede estar vacío")
-        .isInt({ min: 1 }).withMessage("El ID del cliente debe ser un número entero positivo"),
+    body("data.id_user")
+        .exists().withMessage("Debe proporcionar el ID del usuario (id_user)")
+        .notEmpty().withMessage("El ID del usuario no puede estar vacío")
+        .isInt({ min: 1 }).withMessage("El ID del usuario debe ser un número entero positivo"),
 
     body("data.id_service")
         .exists().withMessage("Debe proporcionar el ID del servicio (id_service)")

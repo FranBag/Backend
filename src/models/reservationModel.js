@@ -1,5 +1,7 @@
+import { param } from "express-validator";
 import db from "./../config/dbConection.js";
 import { updateReservationManager } from "./../others/updateReservationManager.js"
+import { getUserRole } from "./userModel.js";
 
 
 export async function getAll(){
@@ -75,11 +77,13 @@ export async function getByProfessional(id){
 
 export async function createOne(data){
     const params = [
-        data.id_customer,
+        (await getUserRole(data.id_user)).customer,
         data.id_service,
         data.id_schedule,
         data.date
     ];
+
+    console.log(params)
 
     try{
         const query = "INSERT INTO reservation(id_customer, id_service, id_schedule, date) VALUES (?, ?, ?, ?)";

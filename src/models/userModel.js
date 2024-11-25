@@ -48,13 +48,19 @@ export async function getUserRole(id_user){
         const query1 = "SELECT id_customer FROM customer WHERE id_user = ?";
         const [customer] = await db.execute(query1, [id_user]);
         if(customer.length > 0) {
-            return "customer";
+            return {
+                role:"customer",
+                customer:customer[0].id_customer
+            };
         }
 
         const query2 = "SELECT id_professional FROM professional WHERE id_user = ?";
         const [professional] = await db.execute(query2, [id_user]);
         if(professional.length > 0) {
-            return "professional";
+            return {
+                role:"professional",
+                customer:professional
+            };;
         }
 
         throw new Error("El usuario no existe o no tiene rol");
@@ -64,7 +70,7 @@ export async function getUserRole(id_user){
     }
 }
 
-export async function createOne(data){ //CONTRASEÑA TIENE QUE ESTAR ENCRIPTADA
+export async function createOne(data){
     const params = [
         data.name,
         data.email,

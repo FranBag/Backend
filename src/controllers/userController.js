@@ -84,7 +84,7 @@ export const login = async (req, res) => {
 
         const isSame = compareSync(pass, result.pass);
         if (isSame) {
-            const role = await getUserRole(result.id_user);
+            const {role} = await getUserRole(result.id_user);
 
             const user = {
                 id: result.id_user,
