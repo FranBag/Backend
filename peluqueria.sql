@@ -131,7 +131,7 @@ INSERT INTO `user`(name, email, phone_number, pass) VALUES
 ("Luciana Gómez", "luciana.gomez@gmail.com", "3764123457", "$2y$10$eAaXSj0pNCFBmEl7Hk6.dOYxvMdda79jgRl1sEedgpE4ZK7X5kneO"),
 ("Mateo Ramírez", "mateo.ramirez@yahoo.com", "3764123458", "$2y$10$DJx0CoZInRO8te.XcJ6flu8Yvn6hXECduEL7NYf7wfXrkUZU/3Asy"),
 ("Valentina Ortiz", "valentina.ortiz@outlook.com", "3764123459", "$2y$10$T4SSoD2gY6m4b/RZqBIS/uhcCRPgu8DVsBLKap5UHVdpiTFjRBZI."),
-("Juan Pérez", "juan.perez@gmail.com", "3764123460", "$2y$10$wSl1NyhipOPV.sUOwFTPXOoiU.OrUQue8u10pFmRSkxdz4cs4LJZ6"),
+("Juan Pérez", "juan.perez@gmail.com", "3764123460", "$2y$10$Q/NT8AF.uSjrPlENxIeG4OA/lXl89n0KnNUILC4CkHr913Th9ztFG"),
 ("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "$2y$10$V6/DTbwnOZLQmZy1wzQ5qeAB/BOA7h6RogHp7kgHEY1Au/ZYIEKe2"),
 ("Sofía López", "sofia.lopez@gmail.com", "3764123462", "$2y$10$.4AXa.siLak4xtZS1qSp..rf7iQgc6THLaPE0MwIJ1pTBMP/zm1ce"),
 ("Lucas Fernández", "lucas.fernandez@yahoo.com", "3764123463", "$2y$10$CZ3CxFddSSQqk4UjfNaE9.86OkrilQg8.x5LumQMLxytJrAe3zy.a"),

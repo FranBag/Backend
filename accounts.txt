@@ -1,0 +1,43 @@
+# Cuentas Peluquería
+
+## Clientes
+
+Luciana Gómez
+luciana.gomez@gmail.com
+lucy123
+
+Valentina Ortiz
+valentina.ortiz@outlook.com
+valentina123
+
+Camila Sánchez
+camila.sanchez@hotmail.com
+camila123
+
+Lucas Fernandez
+lucas.fernandez@yahoo.com
+lucas123
+
+Tomas Rodriguez
+tomas.rodriguez@gmail.com
+tomas123
+
+
+
+## Profesionales
+
+Mateo Ramírez
+mateo.ramirez@yahoo.com
+ramirez123
+
+Juan Pérez
+juan.perez@gmail.com
+juan123
+
+Sofia lopez 
+sofia.lopez@gmail.com
+sofia123
+
+Martina Gomez
+martina.gomez@outlook.com
+gomez123
