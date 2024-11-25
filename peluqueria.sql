@@ -8,7 +8,7 @@ id_service tinyint unsigned auto_increment primary key,
 `name` varchar(60) not null,
 `description` text,
 price int not null,
-duration tinyint not null
+duration float not null
 );
 
 CREATE TABLE `user`(
@@ -55,17 +55,6 @@ state enum("RESERVADO", "FINALIZADO", "CANCELADO")  DEFAULT "RESERVADO",
 foreign key(id_customer) references customer(id_customer) on delete set null,
 foreign key(id_service) references service(id_service) on delete set null,
 foreign key(id_schedule) references schedules(id_schedule) on delete set null
-);
-
-
-CREATE TABLE bill(
-id_bill int unsigned auto_increment primary key,
-id_customer int unsigned,
-id_reservation int unsigned,
-amount int unsigned not null,
-issue_date datetime,
-foreign key(id_customer) references customer(id_customer) on delete set null,
-foreign key(id_reservation) references reservation(id_reservation) on delete set null
 );
 
 
@@ -143,38 +132,51 @@ INSERT INTO `user`(name, email, phone_number, pass) VALUES
 ("Mateo Ramírez", "mateo.ramirez@yahoo.com", "3764123458", "$2y$10$DJx0CoZInRO8te.XcJ6flu8Yvn6hXECduEL7NYf7wfXrkUZU/3Asy"),
 ("Valentina Ortiz", "valentina.ortiz@outlook.com", "3764123459", "$2y$10$T4SSoD2gY6m4b/RZqBIS/uhcCRPgu8DVsBLKap5UHVdpiTFjRBZI."),
 ("Juan Pérez", "juan.perez@gmail.com", "3764123460", "$2y$10$wSl1NyhipOPV.sUOwFTPXOoiU.OrUQue8u10pFmRSkxdz4cs4LJZ6"),
-("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "$2y$10$V6/DTbwnOZLQmZy1wzQ5qeAB/BOA7h6RogHp7kgHEY1Au/ZYIEKe2");
+("Camila Sánchez", "camila.sanchez@hotmail.com", "3764123461", "$2y$10$V6/DTbwnOZLQmZy1wzQ5qeAB/BOA7h6RogHp7kgHEY1Au/ZYIEKe2"),
+("Sofía López", "sofia.lopez@gmail.com", "3764123462", "$2y$10$.4AXa.siLak4xtZS1qSp..rf7iQgc6THLaPE0MwIJ1pTBMP/zm1ce"),
+("Lucas Fernández", "lucas.fernandez@yahoo.com", "3764123463", "$2y$10$CZ3CxFddSSQqk4UjfNaE9.86OkrilQg8.x5LumQMLxytJrAe3zy.a"),
+("Martina Gómez", "martina.gomez@outlook.com", "3764123464", "$2y$10$b4EqwCrF16I2csr5sG5zpO6QjPi3rjDNDqyQBO8cFBZPui/ctgNFO"),
+("Tomás Rodríguez", "tomas.rodriguez@gmail.com", "3764123465", "$2y$10$cPhPRRacLa6XobRLt3u0bOKG8vyByFbKl1/Qr26kNjAn1PXklquQm");
 
 -- Inserciones de servicios
 INSERT INTO service(name, description, price, duration) VALUES
-("A", "Hace A", 15000, 2),
-("B", "Hace B", 7500, 1),
-("C", "Hace C", 20000, 3),
-("D", "Hace D", 10000, 2);
+("Corte de pelo", "Desde cortes simples, clásicos y modernos.", 15000, 0.5),
+("Peinados y Recogidos", "Para un evento especial como una boda, fiesta o graduación.", 10000, 1),
+("Colorimetría", "Amplia gamas de opciones, tintes permanentes, semi permanentes, balayage, mechas y reflejos.", 35000, 3),
+("Tratamientos capilares", "Incluye, hidratación, alizado, nutrición, reparación de daños, entre otros.", 20000, 1.5);
 
 -- Inserciones de profesionales
 INSERT INTO professional(id_user, specialty) VALUES
-(2, 2),
-(4, 4);
+(2, 1),
+(4, 2),
+(6, 3),
+(8, 4);
 
 -- Inserciones de clientes
 INSERT INTO customer(id_user) VALUES
 (1),
 (3),
-(5);
+(5),
+(7),
+(9);
 
 -- Inserciones de reservas
-INSERT INTO reservation(id_customer,id_service ,id_schedule ,state, date) VALUES
-(1, 3, 8, "RESERVADO", "2024-05-21"),
-(2, 1, 20, "CANCELADO", "2024-07-31"),
-(3, 2, 44, "FINALIZADO", "2024-1-5");
+INSERT INTO reservation(id_customer, id_service, id_schedule, state, date) VALUES
+(1, 2, 10, "RESERVADO", "2024-05-22"),
+(2, 4, 12, "FINALIZADO", "2024-06-15"),
+(3, 1, 18, "RESERVADO", "2024-07-01"),
+(4, 3, 25, "CANCELADO", "2024-08-12"),
+(5, 4, 30, "RESERVADO", "2024-09-18"),
+(1, 1, 5, "FINALIZADO", "2024-10-05"),
+(2, 3, 40, "RESERVADO", "2024-10-21"),
+(3, 2, 55, "CANCELADO", "2024-11-01"),
+(4, 4, 60, "RESERVADO", "2024-11-15"),
+(5, 2, 70, "FINALIZADO", "2024-12-10");
 
 
 SELECT * FROM schedules WHERE week_days = "LUNES" OR week_days = "SABADO";
 
 SELECT * FROM `user`;
-
-UPDATE `user` SET email = "luciana.gomez@gmail.com" WHERE id_user = 1;
 
 SELECT * FROM professional;
 
@@ -184,7 +186,7 @@ SELECT * FROM professional INNER JOIN `user` ON professional.id_user = user.id_u
 
 SELECT * FROM customer INNER JOIN `user` ON customer.id_user = user.id_user;
 
-SELECT reservation.id_reservation  FROM reservation INNER JOIN customer ON id_customer = ? ;
+SELECT *  FROM reservation INNER JOIN customer ON customer.id_customer =  reservation.id_customer;
 
 SELECT
 r.id_reservation,
@@ -202,7 +204,7 @@ SELECT * FROM service;
 
 SELECT 
     r.id_reservation,
-    r.id_customer,
+    u.`name` AS customer,
     s.`name` AS service,
     sch.start_hour AS `schedule`,
     r.state,
@@ -211,4 +213,6 @@ FROM reservation r
 INNER JOIN customer c ON r.id_customer = c.id_customer
 INNER JOIN `user` u ON c.id_user = u.id_user
 INNER JOIN service s ON r.id_service = s.id_service
-INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule;
+INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
+INNER JOIN professional p ON s.id_service = p.specialty
+WHERE p.id_user = 9;

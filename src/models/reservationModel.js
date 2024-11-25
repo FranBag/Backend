@@ -38,7 +38,7 @@ export async function getByCustomer(id){
             INNER JOIN \`user\` u ON c.id_user = u.id_user
             INNER JOIN service s ON r.id_service = s.id_service
             INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
-            WHERE r.id_customer = ?`;
+            WHERE c.id_user = ?`;
 
         const [rows] = await db.execute(query, [id]);
         return rows;
@@ -63,7 +63,7 @@ export async function getByProfessional(id){
             INNER JOIN service s ON r.id_service = s.id_service
             INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
             INNER JOIN professional p ON s.id_service = p.specialty
-            WHERE p.id_user = 4;`;
+            WHERE p.id_user = ?;`;
             
         const [rows] = await db.execute(query, [id]);
         return rows;
