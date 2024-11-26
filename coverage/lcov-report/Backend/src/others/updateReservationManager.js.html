@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.26% </span>
+                <span class="strong">57.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/19</span>
+                <span class='fraction'>11/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>6/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">5.26% </span>
+                <span class="strong">57.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/19</span>
+                <span class='fraction'>11/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -87,54 +87,54 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const updateReservationManager = <span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {
-    let updatedQuery = <span class="cstat-no" title="statement not covered" >"";</span>
-    const params = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >    if(data.id_customer){</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const updateReservationManager = (data) =&gt; {
+    let updatedQuery = "";
+    const params = [];
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(data.id_customer){
 <span class="cstat-no" title="statement not covered" >        updatedQuery += "id_customer = ?";</span>
 <span class="cstat-no" title="statement not covered" >        params.push(data.id_customer)</span>
     }
-<span class="cstat-no" title="statement not covered" >    if(data.id_service){</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(data.id_service){
 <span class="cstat-no" title="statement not covered" >        updatedQuery += (updatedQuery ? ", " : "") + "id_service = ?";</span>
 <span class="cstat-no" title="statement not covered" >        params.push(data.id_service)</span>
     }
-<span class="cstat-no" title="statement not covered" >    if(data.id_schedule){</span>
-<span class="cstat-no" title="statement not covered" >        updatedQuery += (updatedQuery ? ", " : "") + "id_schedule = ?";</span>
-<span class="cstat-no" title="statement not covered" >        params.push(data.id_schedule)</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if(data.id_schedule){
+        updatedQuery += (updatedQuery ? <span class="branch-0 cbranch-no" title="branch not covered" >", " </span>: "") + "id_schedule = ?";
+        params.push(data.id_schedule)
     }
-<span class="cstat-no" title="statement not covered" >    if(data.state){</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(data.state){
 <span class="cstat-no" title="statement not covered" >        updatedQuery += (updatedQuery ? ", " : "") + "state = ?";</span>
 <span class="cstat-no" title="statement not covered" >        params.push(data.state)</span>
     }
-<span class="cstat-no" title="statement not covered" >    if(data.date){</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(data.date){
 <span class="cstat-no" title="statement not covered" >        updatedQuery += (updatedQuery ? ", " : "") + "date = ?";</span>
 <span class="cstat-no" title="statement not covered" >        params.push(data.date)</span>
     }
-<span class="cstat-no" title="statement not covered" >    return{updatedQuery, params};</span>
+    return{updatedQuery, params};
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -142,7 +142,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-26T20:28:03.193Z
+                at 2024-11-26T20:56:40.473Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

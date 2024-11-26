@@ -54,7 +54,17 @@ describe("reservation Testing", () => {
             date: "2021-12-05"
             }
         });
-        console.log(response)
         expect(response.statusCode).toBe(201);
+    })
+
+    test("GET /update/:id - Should update a reservation", async () => {
+        const id = 2;
+        const response = await request(app).put(`/reserv/update/${id}`)
+        .set("Authorization", token)
+        .send({data:{
+            id_schedule: 46
+            }
+        });
+        expect(response.statusCode).toBe(200);
     })
 });

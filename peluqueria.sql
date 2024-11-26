@@ -216,7 +216,8 @@ INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
 INNER JOIN professional p ON s.id_service = p.specialty
 WHERE p.id_user = 9;
 
-DELETE FROM service WHERE id_service = 3;
 SELECT * FROM service WHERE id_service = 3;
 
-rollback;
+BEGIN;
+DELETE FROM service WHERE id_service = 3;
+ROLLBACK;
