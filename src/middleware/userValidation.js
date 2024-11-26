@@ -1,6 +1,6 @@
 import { body, validationResult } from "express-validator"
 import jwt from 'jsonwebtoken';
-import config from "./../config/config.json" assert { type: 'json' };
+import config from "../config/config.js";
 
 export const userCreateRules = [
     body("data.name")

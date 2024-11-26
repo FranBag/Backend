@@ -4,7 +4,6 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 
-import config from "./src/config/config.json" assert { type: 'json' };
 import userRouter from "./src/router/userRoutes.js";
 import professionalRoutes from "./src/router/professionalRoutes.js";
 import customerRoutes from "./src/router/customerRoutes.js";
@@ -24,19 +23,9 @@ app.use("/service", serviceRoutes);
 app.use("/reserv", reservationRoutes);
 app.use("/schedule", scheduleRoutes);
 
-
-
 app.use((req, res) => {
     res.status(404).send("Página no encontrada.");
 });
 
 
-app.listen(config.server.port, (err) => {
-    if(err){
-        console.log(err);
-        return;
-    }else{
-        console.log("Servidor funcionando en el puerto " + config.server.port);
-    }
-});
-
+export default app;

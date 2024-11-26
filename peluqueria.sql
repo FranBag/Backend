@@ -173,7 +173,6 @@ INSERT INTO reservation(id_customer, id_service, id_schedule, state, date) VALUE
 (4, 4, 60, "RESERVADO", "2024-11-15"),
 (5, 2, 70, "FINALIZADO", "2024-12-10");
 
-
 SELECT * FROM schedules WHERE week_days = "LUNES" OR week_days = "SABADO";
 
 SELECT * FROM `user`;
@@ -216,3 +215,8 @@ INNER JOIN service s ON r.id_service = s.id_service
 INNER JOIN schedules sch ON r.id_schedule = sch.id_schedule
 INNER JOIN professional p ON s.id_service = p.specialty
 WHERE p.id_user = 9;
+
+DELETE FROM service WHERE id_service = 3;
+SELECT * FROM service WHERE id_service = 3;
+
+rollback;

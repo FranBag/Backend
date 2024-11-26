@@ -1,4 +1,4 @@
-import config from "./../config/config.json" assert { type: 'json' };
+import config from "../config/config.js";
 import { createOne, deleteOne, getAll, getOneByEmail, getOneByID, getUserRole, updateOne } from "../models/userModel.js";
 import bc from "bcryptjs";
 import jwt from 'jsonwebtoken';
@@ -78,7 +78,7 @@ export const login = async (req, res) => {
         const { email, pass } = req.body.data;
         const [result] = await getOneByEmail(email);
         if (!result) {
-            res.status(404).json({ message: "Usuario no encontrado" }); // 404: Not Found
+            res.status(404).json({ message: "Usuario no encontrado" });
             return;
         }
 
@@ -105,7 +105,6 @@ export const login = async (req, res) => {
         }
     } catch (error) {
         console.error(error);
-
         if (error.message === "Illegal arguments: undefined, string") {
             res.status(400).json({ message: "La contraseña no puede estar indefinida" });
             return;

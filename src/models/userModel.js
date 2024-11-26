@@ -60,7 +60,7 @@ export async function getUserRole(id_user){
             return {
                 role:"professional",
                 customer:professional
-            };;
+            };
         }
 
         throw new Error("El usuario no existe o no tiene rol");
