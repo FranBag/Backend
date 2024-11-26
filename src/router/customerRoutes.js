@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/", isAutenticated, get_all_customers);
 router.get("/:id", isAutenticated, idRules, validate, get_customer);
+
 router.delete("/delete/:id", isAutenticated, idRules, validate, delete_customer);
 
 export default router;

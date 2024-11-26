@@ -1,4 +1,4 @@
-import { deleteOne, getAll } from "../models/customerModel.js";
+import { deleteOne, getAll, getOneByID } from "../models/customerModel.js";
 
 
 export const get_all_customers = async (req, res) => {

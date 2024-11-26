@@ -6,7 +6,9 @@ import { idRules } from "../middleware/idValidator.js";
 import { isAutenticated } from "../middleware/userValidation.js";
 
 router.get("/", isAutenticated, get_all_proffesionals);
+
 router.put("/change/:id", isAutenticated, [professionalRules, idRules], validate, update_specialty);
+
 router.delete("/delete/:id", isAutenticated, idRules, validate, delete_professional);
 
 export default router;
